@@ -1,0 +1,14 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: hometo-api
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/**
+          filters:
+            - RewritePath=/api/?(?<segment>.*), /$\{segment}
+            - JwtFilter
+
+jwt:
+  secret: hometoogether
